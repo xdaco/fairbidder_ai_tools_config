@@ -20,7 +20,8 @@
 
 - **Never embed environment variables** in the `shared_ui` build.
 - Use runtime configuration with `initEnvConfig()` / `getEnvConfig()`.
-- Keep `envDir: false` and `define: {}` in `shared_ui/vite.config.ts`.
+- Supabase config in shared_ui must come only from `getEnvConfig()`; see ai_tools_config/shared/shared-ui-env-security.md for the mandatory rule.
+- Keep `envDir: false` and the Supabase `define` overrides in `shared_ui/vite.config.ts`. Supabase in shared_ui: use getEnvConfig() only; see ai_tools_config/shared/shared-ui-env-security.md.
 - Auth components: always use `SharedLogin`.
 - Visual consistency: maintain glass panels and animated gradient backgrounds for auth pages.
 
