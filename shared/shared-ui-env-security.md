@@ -19,6 +19,11 @@ The `shared_ui` package is a **library** consumed by multiple applications (buye
 
 - `import.meta.env.VITE_SUPABASE_URL`, `import.meta.env.VITE_SUPABASE_ANON_KEY` in shared_ui `src/` (except type-only declaration files).
 
+## API server and Supabase usage
+
+- **All data and business APIs** go through the Fairbidder **api_server** (RFQ, bids, messages, auth/me, security events, etc.). The shared_ui API client is initialized with `initAPI({ baseURL: getAPIBaseURL() })` in each app; `getAuthToken` returns the API JWT (from login/refresh).
+- **Supabase** is used only for **auth flows** (OAuth redirect, session, `getSession`, `onAuthStateChange`) and **optional realtime** (e.g. messages table subscription). Supabase URL and anon key are injected at runtime by the host app via `initEnvConfig()`.
+
 ## Enforcement
 
 - The shared_ui build runs `check:no-supabase-env` before building; the build fails if the forbidden pattern is found.
